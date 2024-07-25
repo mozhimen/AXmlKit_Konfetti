@@ -4,8 +4,8 @@ plugins {
     id("com.diffplug.spotless")
 }
 
-NexusConfig.PUBLISH_ARTIFACT_ID = "konfetti-xml"
-apply(from = "../../scripts/publish-module.gradle.kts")
+//NexusConfig.PUBLISH_ARTIFACT_ID = "konfetti-xml"
+//apply(from = "../../scripts/publish-module.gradle.kts")
 
 spotless {
     kotlin {
@@ -20,7 +20,7 @@ spotless {
 }
 
 android {
-    compileSdk = buildVersions.compileSdk
+    compileSdk = 34//buildVersions.compileSdk
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -48,11 +48,12 @@ android {
 }
 
 dependencies {
-    debugApi(project(path = ":konfetti:core"))
-    releaseApi("nl.dionsegijn:konfetti-core:${Constants.konfettiVersion}")
+//    debugApi(project(path = ":konfetti:core"))
+//    releaseApi("nl.dionsegijn:konfetti-core:${Constants.konfettiVersion}")
+    api(project(project.path.replace(project.name, "") +":core"))
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:${Constants.kotlinVersion}")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.22")//${Constants.kotlinVersion}")
 
-    testImplementation(libs.test.junit)
-    testImplementation(libs.test.mockito)
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.mockito:mockito-core:3.11.2")
 }

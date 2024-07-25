@@ -31,6 +31,7 @@
             <option value="$PROJECT_DIR$/samples/shared" />
             <option value="$PROJECT_DIR$/samples/xml-java" />
             <option value="$PROJECT_DIR$/samples/xml-kotlin" />
+            <option value="$PROJECT_DIR$/xmlk_konfetti" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
