@@ -5,7 +5,7 @@ plugins {
 
 buildscript {
     repositories {
-        gradlePluginPortal()
+//        gradlePluginPortal()
         google()
         mavenCentral()
     }
