@@ -45,4 +45,20 @@ object KonfettiUtil {
             )
         )
     }
+
+    @JvmStatic
+    fun rain_fast(): List<Party> {
+        return listOf(
+            Party(
+                speed = 0f,
+                maxSpeed = 30f,
+                damping = 0.9f,
+                angle = Angle.BOTTOM,
+                spread = Spread.ROUND,
+                colors = listOf(0xfce18a, 0xff726d, 0xf4306d, 0xb48def),
+                emitter = Emitter(duration = 2, TimeUnit.SECONDS).perSecond(50),
+                position = Position.Relative(0.0, 0.0).between(Position.Relative(1.0, 0.0))
+            )
+        )
+    }
 }
