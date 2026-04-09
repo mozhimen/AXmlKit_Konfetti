@@ -1,8 +1,11 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("kotlin-android")
 //    id("com.diffplug.spotless")
 }
+
+//NexusConfig.PUBLISH_ARTIFACT_ID = "konfetti-compose"
+//apply(from = "../../scripts/publish-module.gradle.kts")
 
 //spotless {
 //    kotlin {
@@ -17,20 +20,13 @@ plugins {
 //}
 
 android {
-    namespace = "nl.dionsegijn.xml.compose"
-    compileSdk = 35
+    namespace = "nl.dionsegijn.konfetti.compose"
+    compileSdk = 34
 
     defaultConfig {
-        applicationId = "nl.dionsegijn.xml.compose"
         minSdk = 21
-        targetSdk = 34
-        versionCode = 1
-        versionName = "0.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
     }
 
     buildTypes {
@@ -39,26 +35,28 @@ android {
 //            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
     buildFeatures {
         compose = true
     }
+
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.15"
     }
 }
 
 dependencies {
-    implementation(project(path = ":compose"))
-    implementation(project(path = ":samples:shared"))
+    api(project(path = ":core"))
+//    releaseApi("nl.dionsegijn:konfetti-core:2.1.0-beta01")
 
-    implementation("com.github.mozhimen.ASwiftKit:basick:2.0.4")
     implementation("com.github.mozhimen.ASwiftKit:composek:2.0.4")
-    implementation("androidx.compose.runtime:runtime-livedata:1.5.15")
 }

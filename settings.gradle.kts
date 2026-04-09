@@ -1,22 +1,23 @@
 // Library modules
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+        mavenLocal()
+        maven("https://jitpack.io")
+        gradlePluginPortal()
+    }
+}
 include(
-    ":konfetti:xml",
-    ":konfetti:compose",
-    ":konfetti:core"
-)
-// Sample modules
-include(
+    ":xml",
+    ":compose",
+    ":core",
     ":samples:compose-kotlin",
     ":samples:xml-kotlin",
     ":samples:xml-java",
     ":samples:shared"
 )
+include(
 
-dependencyResolutionManagement {
-    repositories {
-        gradlePluginPortal()
-        google()
-        mavenCentral()
-    }
-}
+)
 include(":xmlk_konfetti")

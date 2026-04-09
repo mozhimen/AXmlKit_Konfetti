@@ -1,26 +1,26 @@
 plugins {
     id("com.android.library")
     id("kotlin-android")
-    id("com.diffplug.spotless")
+//    id("com.diffplug.spotless")
 }
 
 //NexusConfig.PUBLISH_ARTIFACT_ID = "konfetti-xml"
 //apply(from = "../../scripts/publish-module.gradle.kts")
 
-spotless {
-    kotlin {
-        ktlint("1.1.0")
-        target("src/**/*.kt")
-    }
-    java {
-        removeUnusedImports()
-        googleJavaFormat("1.15.0")
-        target("**/*.java")
-    }
-}
+//spotless {
+//    kotlin {
+//        ktlint("1.1.0")
+//        target("src/**/*.kt")
+//    }
+//    java {
+//        removeUnusedImports()
+//        googleJavaFormat("1.15.0")
+//        target("**/*.java")
+//    }
+//}
 
 android {
-    compileSdk = 34//buildVersions.compileSdk
+    compileSdk = 34
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8

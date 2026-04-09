@@ -1,27 +1,31 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    id("com.diffplug.spotless")
+//    id("com.diffplug.spotless")
 }
 
-spotless {
-    kotlin {
-        ktlint("1.1.0")
-        target("src/**/*.kt")
-    }
-    java {
-        removeUnusedImports()
-        googleJavaFormat("1.15.0")
-        target("**/*.java")
-    }
-}
+//spotless {
+//    kotlin {
+//        ktlint("1.1.0")
+//        target("src/**/*.kt")
+//    }
+//    java {
+//        removeUnusedImports()
+//        googleJavaFormat("1.15.0")
+//        target("**/*.java")
+//    }
+//}
 
 android {
-    compileSdk = buildVersions.compileSdk
+    namespace = "nl.dionsegijn.xml.kotlin"
+    compileSdk = 34
 
     defaultConfig {
+        applicationId = "nl.dionsegijn.xml.kotlin"
         minSdk = 23
-        targetSdk = buildVersions.targetSdk
+        targetSdk = 34
+        versionCode = 1
+        versionName = "0.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -39,18 +43,11 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    namespace = "nl.dionsegijn.xml.kotlin"
 }
 
 dependencies {
-    implementation(project(path = ":konfetti:xml"))
+    implementation(project(path = ":xml"))
     implementation(project(path = ":samples:shared"))
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcomat)
-    implementation(libs.android.material)
-    implementation(libs.androidx.constraintlayout)
-
-    debugImplementation(libs.androidx.tracing)
-    androidTestImplementation(libs.androidx.test.espresso)
-    androidTestImplementation(libs.test.junit.ext)
+    implementation("com.github.mozhimen.ASwiftKit:basick:2.0.4")
+    implementation("com.github.mozhimen.ASwiftKit:xmlk:2.0.4")
 }

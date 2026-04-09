@@ -4,11 +4,12 @@ plugins {
 }
 
 android {
-    compileSdk = buildVersions.compileSdk
+    namespace = "nl.dionsegijn.samples.shared"
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 21
-        targetSdk = buildVersions.targetSdk
+//        targetSdk = 34
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 //        consumerProguardFiles("consumer-rules.pro")
@@ -27,13 +28,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    namespace = "nl.dionsegijn.samples.shared"
 }
 
 dependencies {
-    implementation(project(path = ":konfetti:core"))
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcomat)
-    implementation(libs.android.material)
+    implementation(project(path = ":core"))
+    implementation("com.github.mozhimen.ASwiftKit:basick:2.0.4")
 }

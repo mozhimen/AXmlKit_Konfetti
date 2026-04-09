@@ -4,17 +4,6 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <compositeConfiguration>
-          <compositeBuild compositeDefinitionSource="SCRIPT">
-            <builds>
-              <build path="$PROJECT_DIR$/buildSrc" name="buildSrc">
-                <projects>
-                  <project path="$PROJECT_DIR$/buildSrc" />
-                </projects>
-              </build>
-            </builds>
-          </compositeBuild>
-        </compositeConfiguration>
         <option name="delegatedBuild" value="false" />
         <option name="testRunner" value="CHOOSE_PER_TEST" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -22,20 +11,17 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/buildSrc" />
-            <option value="$PROJECT_DIR$/konfetti" />
-            <option value="$PROJECT_DIR$/konfetti/compose" />
-            <option value="$PROJECT_DIR$/konfetti/core" />
-            <option value="$PROJECT_DIR$/konfetti/xml" />
+            <option value="$PROJECT_DIR$/compose" />
+            <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/samples" />
             <option value="$PROJECT_DIR$/samples/compose-kotlin" />
             <option value="$PROJECT_DIR$/samples/shared" />
             <option value="$PROJECT_DIR$/samples/xml-java" />
             <option value="$PROJECT_DIR$/samples/xml-kotlin" />
+            <option value="$PROJECT_DIR$/xml" />
             <option value="$PROJECT_DIR$/xmlk_konfetti" />
           </set>
         </option>
-        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
     </option>
   </component>
