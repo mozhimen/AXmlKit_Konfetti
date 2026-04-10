@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.cfg.pseudocode.and
+
 //plugins {
 ////    id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
 //    id("org.jetbrains.dokka") version "1.7.0"
@@ -34,3 +36,50 @@ buildscript {
 //        }
 //    }
 //}
+
+subprojects {
+    apply(plugin = "maven-publish")
+
+    afterEvaluate {
+        // Java Library 模块
+        if (plugins.hasPlugin("java-library")) {
+            extensions.configure<PublishingExtension>("publishing") {
+                publications {
+                    create<MavenPublication>("mavenJava") {
+                        from(components["java"])
+                        groupId = "com.github.mozhimen"
+                        artifactId = project.name
+                        version = "0.0.2"
+                    }
+                }
+            }
+        }
+        // Android Library 模块
+        else if (plugins.hasPlugin("com.android.library")) {
+            val android = extensions.getByType<com.android.build.gradle.LibraryExtension>()
+//            android.libraryVariants.all { variant ->
+
+//            }
+            android.libraryVariants.all {
+                if (buildType.name == "release") {
+                    val releaseAar = tasks.named ("bundle${name.capitalize()}Aar")
+
+                    extensions.configure<PublishingExtension>("publishing") {
+                        publications {
+                            create<MavenPublication>("release") {
+                                groupId = "com.github.mozhimen"
+                                artifactId = project.name
+                                version = "0.0.2"
+
+                                // 使用任务输出的 AAR 文件
+                                artifact(releaseAar) {
+                                    builtBy(releaseAar)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
