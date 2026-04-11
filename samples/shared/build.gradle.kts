@@ -32,5 +32,5 @@ android {
 
 dependencies {
     implementation(project(path = ":core"))
-    implementation("com.github.mozhimen.ASwiftKit:basick:2.0.4")
+    implementation("com.github.mozhimen.ASwiftKit:basick:2.1.6")
 }

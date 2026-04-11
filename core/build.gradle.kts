@@ -36,8 +36,6 @@ tasks.withType(KotlinCompile::class.java).configureEach {
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.25")//${Constants.kotlinVersion}")
 //    implementation("com.github.mozhimen.ALibKit_Jetbrains:kotlin-stdlib:0.0.2")//${Constants.kotlinVersion}")
-//    testImplementation(libs.test.junit)
-//    testImplementation(libs.test.mockito)
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.mockito:mockito-core:3.11.2")
 }

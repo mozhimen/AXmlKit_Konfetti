@@ -58,7 +58,7 @@ dependencies {
     implementation(project(path = ":compose"))
     implementation(project(path = ":samples:shared"))
 
-    implementation("com.github.mozhimen.ASwiftKit:basick:2.0.4")
-    implementation("com.github.mozhimen.ASwiftKit:composek:2.0.4")
+    implementation("com.github.mozhimen.ASwiftKit:basick:2.1.6")
+    implementation("com.github.mozhimen.ASwiftKit:composek:2.1.6")
     implementation("androidx.compose.runtime:runtime-livedata:1.5.15")
 }

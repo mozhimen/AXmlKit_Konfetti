@@ -58,5 +58,5 @@ dependencies {
     api(project(path = ":core"))
 //    releaseApi("nl.dionsegijn:konfetti-core:2.1.0-beta01")
 
-    implementation("com.github.mozhimen.ASwiftKit:composek:2.0.4")
+    implementation("com.github.mozhimen.ASwiftKit:composek:2.1.6")
 }

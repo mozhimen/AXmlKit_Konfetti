@@ -47,6 +47,6 @@ android {
 
 dependencies {
     implementation(project(path = ":xml"))
-    implementation("com.github.mozhimen.ASwiftKit:basick:2.0.4")
-    implementation("com.github.mozhimen.ASwiftKit:xmlk:2.0.4")
+    implementation("com.github.mozhimen.ASwiftKit:basick:2.1.6")
+    implementation("com.github.mozhimen.ASwiftKit:xmlk:2.1.6")
 }

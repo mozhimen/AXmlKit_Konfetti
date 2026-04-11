@@ -48,11 +48,8 @@ android {
 }
 
 dependencies {
-//    debugApi(project(path = ":konfetti:core"))
-//    releaseApi("nl.dionsegijn:konfetti-core:${Constants.konfettiVersion}")
     api(project(project.path.replace(project.name, "") +":core"))
-
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.22")//${Constants.kotlinVersion}")
+    implementation("com.github.mozhimen.ALibKit_Jetbrains:kotlin-stdlib:0.0.2")
 
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.mockito:mockito-core:3.11.2")

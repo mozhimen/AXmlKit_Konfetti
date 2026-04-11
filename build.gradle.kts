@@ -39,41 +39,142 @@ buildscript {
 
 subprojects {
     apply(plugin = "maven-publish")
+    val versionToPublished = "0.0.3"
+    val groupIdToPublished = "com.github.mozhimen.AXmlKit_Konfetti"
 
     afterEvaluate {
-        // Java Library 模块
-        if (plugins.hasPlugin("java-library")) {
-            extensions.configure<PublishingExtension>("publishing") {
-                publications {
-                    create<MavenPublication>("mavenJava") {
-                        from(components["java"])
-                        groupId = "com.github.mozhimen"
-                        artifactId = project.name
-                        version = "0.0.2"
+
+        when {
+            plugins.hasPlugin("java-library") -> {
+                extensions.configure<PublishingExtension>("publishing") {
+                    publications {
+                        create<MavenPublication>("mavenJava") {
+                            from(components["java"])
+                            groupId = "com.github.mozhimen"
+                            artifactId = project.name
+                            version = versionToPublished
+
+                            pom.withXml {
+                                val dependenciesNode = asNode().appendNode("dependencies")
+
+                                // 在执行时获取依赖，而不是配置时
+                                val apiDeps = project.configurations["api"].allDependencies.toList()
+                                val implDeps = project.configurations["implementation"].allDependencies.toList()
+
+                                apiDeps.forEach { dep ->
+                                    val depNode = dependenciesNode.appendNode("dependency")
+                                    val groupId: String?
+                                    val version: String?
+
+                                    if (dep is ProjectDependency) {
+                                        groupId = groupIdToPublished
+                                        version = versionToPublished
+                                    } else {
+                                        groupId = dep.group
+                                        version = dep.version
+                                    }
+
+                                    depNode.appendNode("groupId", groupId)
+                                    depNode.appendNode("artifactId", dep.name)
+                                    depNode.appendNode("version", version)
+                                    depNode.appendNode("scope", "compile")
+
+                                    println("[POM DEBUG] api dependency -> groupId: $groupId, artifactId: ${dep.name}, version: $version")
+                                }
+
+                                implDeps.forEach { dep ->
+                                    val depNode = dependenciesNode.appendNode("dependency")
+                                    val groupId: String?
+                                    val version: String?
+
+                                    if (dep is ProjectDependency) {
+                                        groupId = groupIdToPublished
+                                        version = versionToPublished
+                                    } else {
+                                        groupId = dep.group
+                                        version = dep.version
+                                    }
+
+                                    depNode.appendNode("groupId", groupId)
+                                    depNode.appendNode("artifactId", dep.name)
+                                    depNode.appendNode("version", version)
+                                    depNode.appendNode("scope", "runtime")
+
+                                    println("[POM DEBUG] runtime dependency -> groupId: $groupId, artifactId: ${dep.name}, version: $version")
+                                }
+                            }
+                        }
                     }
                 }
             }
-        }
-        // Android Library 模块
-        else if (plugins.hasPlugin("com.android.library")) {
-            val android = extensions.getByType<com.android.build.gradle.LibraryExtension>()
-//            android.libraryVariants.all { variant ->
 
-//            }
-            android.libraryVariants.all {
-                if (buildType.name == "release") {
-                    val releaseAar = tasks.named ("bundle${name.capitalize()}Aar")
+            project.plugins.hasPlugin("com.android.library") -> {
+                val android = extensions.getByName("android") as com.android.build.gradle.LibraryExtension
 
-                    extensions.configure<PublishingExtension>("publishing") {
-                        publications {
-                            create<MavenPublication>("release") {
-                                groupId = "com.github.mozhimen"
-                                artifactId = project.name
-                                version = "0.0.2"
+                android.libraryVariants.all {
+                    if (buildType.name == "release") {
+                        val releaseAar = tasks.named("bundle${name.capitalize()}Aar")
 
-                                // 使用任务输出的 AAR 文件
-                                artifact(releaseAar) {
-                                    builtBy(releaseAar)
+                        extensions.configure<PublishingExtension>("publishing") {
+                            publications {
+                                create<MavenPublication>("release") {
+                                    groupId = "com.github.mozhimen"
+                                    artifactId = project.name
+                                    version = versionToPublished
+
+                                    artifact(releaseAar) {
+                                        builtBy(releaseAar)
+                                    }
+
+                                    pom.withXml {
+                                        val dependenciesNode = asNode().appendNode("dependencies")
+
+                                        // 在执行时获取依赖
+                                        val apiDeps = project.configurations["api"].allDependencies.toList()
+                                        val implDeps = project.configurations["implementation"].allDependencies.toList()
+
+                                        apiDeps.forEach { dep ->
+                                            val depNode = dependenciesNode.appendNode("dependency")
+                                            val groupId: String?
+                                            val version: String?
+
+                                            if (dep is ProjectDependency) {
+                                                groupId = groupIdToPublished
+                                                version = versionToPublished
+                                            } else {
+                                                groupId = dep.group
+                                                version = dep.version
+                                            }
+
+                                            depNode.appendNode("groupId", groupId)
+                                            depNode.appendNode("artifactId", dep.name)
+                                            depNode.appendNode("version", version)
+                                            depNode.appendNode("scope", "compile")
+
+                                            println("[POM DEBUG] api dependency -> groupId: $groupId, artifactId: ${dep.name}, version: $version")
+                                        }
+
+                                        implDeps.forEach { dep ->
+                                            val depNode = dependenciesNode.appendNode("dependency")
+                                            val groupId: String?
+                                            val version: String?
+
+                                            if (dep is ProjectDependency) {
+                                                groupId = groupIdToPublished
+                                                version = versionToPublished
+                                            } else {
+                                                groupId = dep.group
+                                                version = dep.version
+                                            }
+
+                                            depNode.appendNode("groupId", groupId)
+                                            depNode.appendNode("artifactId", dep.name)
+                                            depNode.appendNode("version", version)
+                                            depNode.appendNode("scope", "runtime")
+
+                                            println("[POM DEBUG] runtime dependency -> groupId: $groupId, artifactId: ${dep.name}, version: $version")
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -83,3 +184,50 @@ subprojects {
         }
     }
 }
+
+//subprojects {
+//    apply(plugin = "maven-publish")
+//
+//    afterEvaluate {
+//        // Java Library 模块
+//        if (plugins.hasPlugin("java-library")) {
+//            extensions.configure<PublishingExtension>("publishing") {
+//                publications {
+//                    create<MavenPublication>("mavenJava") {
+//                        from(components["java"])
+//                        groupId = "com.github.mozhimen"
+//                        artifactId = project.name
+//                        version = "0.0.2"
+//                    }
+//                }
+//            }
+//        }
+//        // Android Library 模块
+//        else if (plugins.hasPlugin("com.android.library")) {
+//            val android = extensions.getByType<com.android.build.gradle.LibraryExtension>()
+////            android.libraryVariants.all { variant ->
+//
+////            }
+//            android.libraryVariants.all {
+//                if (buildType.name == "release") {
+//                    val releaseAar = tasks.named ("bundle${name.capitalize()}Aar")
+//
+//                    extensions.configure<PublishingExtension>("publishing") {
+//                        publications {
+//                            create<MavenPublication>("release") {
+//                                groupId = "com.github.mozhimen"
+//                                artifactId = project.name
+//                                version = "0.0.2"
+//
+//                                // 使用任务输出的 AAR 文件
+//                                artifact(releaseAar) {
+//                                    builtBy(releaseAar)
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
