@@ -15,9 +15,6 @@ include(
     ":samples:compose-kotlin",
     ":samples:xml-kotlin",
     ":samples:xml-java",
-    ":samples:shared"
+    ":samples:shared",
+    ":xmlk_konfetti"
 )
-include(
-
-)
-include(":xmlk_konfetti")
